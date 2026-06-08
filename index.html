@@ -911,65 +911,125 @@
 
   /* ===== FOOTER ===== */
   footer {
-    background: var(--color-light-gray);
-    color: var(--color-dark);
-    padding: 80px 0 0;
-    border-top: 1px solid rgba(15,15,15,0.08);
+    background: var(--color-dark);
+    color: var(--color-off-white);
+    padding: 96px 0 72px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    position: relative;
+    overflow: hidden;
+  }
+  footer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 10% 20%, rgba(200,82,10,0.07), transparent 50%),
+      radial-gradient(circle at 90% 80%, rgba(29,68,112,0.14), transparent 55%);
+    pointer-events: none;
   }
   .footer-grid {
     display: grid;
-    grid-template-columns: 1.3fr 1fr 1fr 1fr;
-    gap: 40px;
-    padding-bottom: 56px;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 64px;
+    position: relative;
+    z-index: 1;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
   }
+
+  /* Logo glow signature */
   .footer-brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 18px;
+    margin-bottom: 22px;
   }
-  .footer-brand img { height: 46px; width: auto; }
-  .footer-tagline { color: var(--color-muted); font-size: 0.92rem; margin-bottom: 22px; max-width: 280px; }
+  .footer-logo-glow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 18px 28px;
+    border-radius: 14px;
+    background: rgba(245,240,235,0.06);
+    border: 1px solid rgba(245,240,235,0.09);
+    overflow: visible;
+  }
+  .footer-logo-glow::before {
+    content: '';
+    position: absolute;
+    inset: -18px;
+    border-radius: 22px;
+    background: radial-gradient(ellipse at 50% 50%, rgba(245,240,235,0.18) 0%, rgba(245,240,235,0.06) 40%, transparent 72%);
+    filter: blur(14px);
+    z-index: 0;
+    pointer-events: none;
+  }
+  .footer-logo-glow img {
+    height: 52px;
+    width: auto;
+    position: relative;
+    z-index: 1;
+    display: block;
+    filter: drop-shadow(0 2px 12px rgba(245,240,235,0.28));
+  }
+  .footer-tagline {
+    color: rgba(245,240,235,0.55);
+    font-size: 0.92rem;
+    margin-bottom: 24px;
+    max-width: 280px;
+    line-height: 1.7;
+  }
   .footer-social { display: flex; gap: 12px; }
   .footer-social a {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: 1px solid rgba(15,15,15,0.14);
-    color: var(--color-dark);
+    border: 1px solid rgba(245,240,235,0.14);
+    color: rgba(245,240,235,0.65);
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.25s ease;
+    position: relative;
+    z-index: 1;
   }
   .footer-social a:hover {
     background: var(--color-accent);
     border-color: var(--color-accent);
-    color: var(--color-off-white);
+    color: #fff;
     transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(200,82,10,0.35);
+  }
+  .footer-col {
+    position: relative;
+    z-index: 1;
   }
   .footer-col h4 {
-    font-size: 0.95rem;
+    font-size: 0.82rem;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 20px;
-    color: var(--color-dark);
+    letter-spacing: 0.1em;
+    margin-bottom: 22px;
+    color: rgba(245,240,235,0.45);
+    font-weight: 600;
   }
-  .footer-col ul { display: grid; gap: 12px; }
+  .footer-col ul { display: grid; gap: 13px; }
   .footer-col a, .footer-col li {
-    color: var(--color-muted);
+    color: rgba(245,240,235,0.65);
     font-size: 0.92rem;
     transition: color 0.25s ease;
+    line-height: 1.5;
   }
   .footer-col a:hover { color: var(--color-accent); }
-  .footer-bottom {
-    border-top: 1px solid rgba(15,15,15,0.08);
-    padding: 24px 0;
+
+  /* Separate copyright bar */
+  .copyright-bar {
+    background: #080808;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 20px 0;
     text-align: center;
-    color: var(--color-muted);
-    font-size: 0.85rem;
+    color: rgba(245,240,235,0.35);
+    font-size: 0.82rem;
+    line-height: 1.8;
   }
-  .footer-bottom span { color: var(--color-accent); font-weight: 600; }
+  .copyright-bar span { color: var(--color-accent); font-weight: 600; }
 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 1024px) {
@@ -1400,7 +1460,9 @@
     <div class="footer-grid">
       <div>
         <div class="footer-brand">
-          <img src="logo.png" alt="Johamar AB – Bygg & Renovering" width="2000" height="803" loading="lazy">
+          <span class="footer-logo-glow">
+            <img src="logo.png" alt="Johamar AB – Bygg & Renovering" width="2000" height="803" loading="lazy">
+          </span>
         </div>
         <p class="footer-tagline">Bygg- och renoveringstjänster med kvalitet och engagemang i Stockholm och omnejd.</p>
         <div class="footer-social">
@@ -1440,12 +1502,13 @@
         </ul>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>© 2025 Johamar AB · Mullbärstigen 7, 196 34 Kungsängen · Org.nr: 559XXX-XXXX</p>
-      <p>Byggd med <span>❤</span> i Stockholm</p>
-    </div>
   </div>
 </footer>
+
+<div class="copyright-bar">
+  <p>© 2025 Johamar AB · Mullbärstigen 7, 196 34 Kungsängen · Org.nr: 559XXX-XXXX</p>
+  <p>Byggd med <span>❤</span> i Stockholm</p>
+</div>
 
 <script>
   // Sticky nav background on scroll
