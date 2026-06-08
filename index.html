@@ -856,164 +856,197 @@
     z-index: 999;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
     transition: opacity 0.35s ease;
+    animation: float-entrance 0.6s ease both;
+  }
+  @keyframes float-entrance {
+    from { opacity: 0; transform: translateX(40px); }
+    to   { opacity: 1; transform: translateX(0); }
   }
   .social-float a {
-    width: 48px;
-    height: 48px;
-    border-radius: 14px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.3rem;
-    color: rgba(245,240,235,0.92);
-    box-shadow: 0 8px 22px rgba(15,15,15,0.32);
-    transition: transform 0.28s ease, box-shadow 0.28s ease;
-    border: 1px solid rgba(255,255,255,0.08);
+    font-size: 1.35rem;
+    color: #fff;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
   .social-float a:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 14px 32px rgba(15,15,15,0.45);
+    transform: translateY(-5px) scale(1.08);
   }
   .social-float .sf-facebook {
-    background: linear-gradient(145deg, #0F2A4A, #1D4470);
+    background: #1877F2;
+    box-shadow: 0 6px 20px rgba(24,119,242,0.45);
+  }
+  .social-float .sf-facebook:hover {
+    box-shadow: 0 12px 28px rgba(24,119,242,0.60);
   }
   .social-float .sf-instagram {
-    background: linear-gradient(145deg, var(--color-accent), #1D4470);
+    background: linear-gradient(45deg, #F58529 0%, #DD2A7B 40%, #8134AF 70%, #515BD4 100%);
+    box-shadow: 0 6px 20px rgba(221,42,123,0.45);
+  }
+  .social-float .sf-instagram:hover {
+    box-shadow: 0 12px 28px rgba(221,42,123,0.60);
   }
   .social-float .sf-whatsapp {
-    width: 54px;
-    height: 54px;
-    font-size: 1.5rem;
-    border-radius: 16px;
-    background: linear-gradient(145deg, #1A7A46, #25A055);
-    animation: float-pulse 3s ease-in-out infinite;
+    background: #25D366;
+    box-shadow: 0 6px 20px rgba(37,211,102,0.45);
   }
-  @keyframes float-pulse {
-    0%, 100% { box-shadow: 0 8px 22px rgba(26,122,70,0.38); }
-    50%       { box-shadow: 0 12px 32px rgba(26,122,70,0.60); transform: translateY(-2px); }
+  .social-float .sf-whatsapp:hover {
+    box-shadow: 0 12px 28px rgba(37,211,102,0.60);
   }
-  .social-float .sf-whatsapp:hover { animation: none; transform: translateY(-5px); }
   @media (max-width: 768px) {
-    .social-float { right: 14px; bottom: 18px; gap: 10px; }
-    .social-float a { width: 42px; height: 42px; font-size: 1.15rem; border-radius: 12px; }
-    .social-float .sf-whatsapp { width: 48px; height: 48px; font-size: 1.35rem; border-radius: 14px; }
+    .social-float { right: 16px; bottom: 20px; gap: 10px; }
+    .social-float a { width: 46px; height: 46px; font-size: 1.2rem; }
   }
-  /* ===== FÖLJ OSS ===== */
-  #folj-oss {
-    background: var(--color-steel);
-    padding: 100px 0;
+  /* ===== SÅ HÄR ARBETAR VI ===== */
+  #process {
+    background: var(--color-dark);
+    padding: 120px 0;
     position: relative;
     overflow: hidden;
   }
-  #folj-oss::before {
+  #process::before {
     content: '';
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse at 15% 60%, rgba(200,82,10,0.07), transparent 50%),
-      radial-gradient(ellipse at 85% 30%, rgba(15,42,74,0.18), transparent 55%);
+      radial-gradient(ellipse at 5% 40%, rgba(200,82,10,0.08), transparent 50%),
+      radial-gradient(ellipse at 95% 60%, rgba(15,42,74,0.18), transparent 55%);
     pointer-events: none;
   }
-  .folj-inner {
+  .process-header {
+    text-align: center;
+    max-width: 620px;
+    margin: 0 auto 80px;
     position: relative;
     z-index: 1;
-    text-align: center;
-    max-width: 640px;
-    margin: 0 auto 56px;
   }
-  .folj-inner .eyebrow { margin-bottom: 14px; display: block; }
-  .folj-inner h2 { margin-bottom: 20px; }
-  .folj-inner p {
-    color: rgba(245,240,235,0.62);
-    font-size: 1rem;
-    line-height: 1.75;
+  .process-header .eyebrow { display: block; margin-bottom: 14px; }
+  .process-header p {
+    color: rgba(245,240,235,0.58);
+    font-size: 1.02rem;
+    margin-top: 18px;
+    line-height: 1.7;
   }
-  .folj-cards {
+  .process-steps {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
     position: relative;
     z-index: 1;
-    max-width: 860px;
-    margin: 0 auto;
+    margin-bottom: 80px;
   }
-  .folj-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 18px;
-    padding: 40px 28px 36px;
-    text-align: center;
-    text-decoration: none;
-    color: var(--color-off-white);
+  /* Connector line between cards */
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 52px;
+    left: calc(12.5% + 4px);
+    right: calc(12.5% + 4px);
+    height: 2px;
+    background: linear-gradient(90deg,
+      var(--color-accent) 0%,
+      rgba(200,82,10,0.5) 40%,
+      rgba(29,68,112,0.5) 70%,
+      var(--color-navy-light) 100%);
+    z-index: 0;
+  }
+  .process-step {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 14px;
-    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+    text-align: center;
+    padding: 0 20px;
     position: relative;
-    overflow: hidden;
+    z-index: 1;
   }
-  .folj-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    border-radius: 18px 18px 0 0;
-    opacity: 0;
-    transition: opacity 0.35s ease;
-  }
-  .folj-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 24px 56px rgba(0,0,0,0.35);
-    border-color: rgba(255,255,255,0.14);
-    background: rgba(255,255,255,0.07);
-  }
-  .folj-card:hover::before { opacity: 1; }
-
-  .folj-card--fb::before  { background: linear-gradient(90deg, var(--color-navy), var(--color-navy-light)); }
-  .folj-card--ig::before  { background: linear-gradient(90deg, var(--color-accent), var(--color-navy-light)); }
-  .folj-card--wa::before  { background: linear-gradient(90deg, #1A7A46, #25A055); }
-
-  .folj-icon {
-    width: 64px;
-    height: 64px;
-    border-radius: 16px;
+  .process-step-num {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--color-dark);
+    border: 2px solid var(--color-accent);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.8rem;
-    transition: transform 0.35s ease;
+    margin-bottom: 32px;
+    position: relative;
+    flex-shrink: 0;
+    transition: background 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
   }
-  .folj-card:hover .folj-icon { transform: scale(1.1) rotate(-4deg); }
-  .folj-card--fb .folj-icon { background: rgba(15,42,74,0.55);  color: #7AACDC; }
-  .folj-card--ig .folj-icon { background: rgba(200,82,10,0.22); color: var(--color-accent-light); }
-  .folj-card--wa .folj-icon { background: rgba(26,122,70,0.35); color: #4DD87A; }
-
-  .folj-card h3 {
-    font-size: 1.1rem;
+  .process-step:hover .process-step-num {
+    background: var(--color-accent);
+    transform: scale(1.1);
+  }
+  .process-step-num i {
+    font-size: 1.2rem;
+    color: var(--color-accent);
+    transition: color 0.35s ease;
+  }
+  .process-step:hover .process-step-num i { color: #fff; }
+  .process-step-num .step-index {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: #fff;
+    font-size: 0.65rem;
     font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Sora', sans-serif;
+  }
+  .process-step h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--color-off-white);
     letter-spacing: -0.01em;
+    line-height: 1.35;
   }
-  .folj-card p {
+  .process-step p {
     font-size: 0.88rem;
-    color: rgba(245,240,235,0.50);
-    line-height: 1.55;
+    color: rgba(245,240,235,0.52);
+    line-height: 1.65;
   }
-  .folj-card .folj-handle {
-    font-size: 0.82rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    color: rgba(245,240,235,0.38);
-    margin-top: 4px;
+  .process-cta {
+    text-align: center;
+    position: relative;
+    z-index: 1;
   }
-  .folj-card--fb:hover h3 { color: #7AACDC; }
-  .folj-card--ig:hover h3 { color: var(--color-accent-light); }
-  .folj-card--wa:hover h3 { color: #4DD87A; }
-
-  @media (max-width: 768px) {
-    .folj-cards { grid-template-columns: 1fr; max-width: 380px; gap: 18px; }
+  .process-cta p {
+    color: rgba(245,240,235,0.62);
+    font-size: 1.05rem;
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+  @media (max-width: 1024px) {
+    .process-steps {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 48px 32px;
+    }
+    .process-steps::before { display: none; }
+    .process-step { padding: 0 12px; }
+  }
+  @media (max-width: 600px) {
+    .process-steps {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      max-width: 360px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .process-step { align-items: flex-start; text-align: left; flex-direction: row; gap: 20px; }
+    .process-step-num { margin-bottom: 0; flex-shrink: 0; }
   }
 
   .btn-primary.cta-pulse {
@@ -1379,6 +1412,64 @@
     </div>
   </section>
 
+  <!-- ===== SÅ HÄR ARBETAR VI ===== -->
+  <section id="process">
+    <div class="container">
+
+      <div class="process-header reveal">
+        <span class="eyebrow">Vår arbetsprocess</span>
+        <h2>Så här arbetar vi</h2>
+        <p>Från första kontakt till färdigt projekt — en tydlig och trygg process där du alltid vet vad som händer härnäst.</p>
+      </div>
+
+      <div class="process-steps">
+
+        <div class="process-step reveal">
+          <div class="process-step-num">
+            <i class="fa-solid fa-comments" aria-hidden="true"></i>
+            <span class="step-index">1</span>
+          </div>
+          <h3>Kostnadsfri konsultation</h3>
+          <p>Vi lyssnar på dina behov och önskemål, diskuterar projektet och svarar på alla dina frågor utan kostnad.</p>
+        </div>
+
+        <div class="process-step reveal">
+          <div class="process-step-num">
+            <i class="fa-solid fa-file-lines" aria-hidden="true"></i>
+            <span class="step-index">2</span>
+          </div>
+          <h3>Offert &amp; planering</h3>
+          <p>Vi tar fram en tydlig offert och en genomtänkt projektplan med tidsram och material — inga dolda kostnader.</p>
+        </div>
+
+        <div class="process-step reveal">
+          <div class="process-step-num">
+            <i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i>
+            <span class="step-index">3</span>
+          </div>
+          <h3>Utförande</h3>
+          <p>Vårt team utför arbetet med precision, kvalitetsmaterial och löpande kommunikation — alltid i tid och enligt plan.</p>
+        </div>
+
+        <div class="process-step reveal">
+          <div class="process-step-num">
+            <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+            <span class="step-index">4</span>
+          </div>
+          <h3>Slutkontroll &amp; nöjd kund</h3>
+          <p>Vi går igenom projektet tillsammans, säkerställer att allt möter vår kvalitetsstandard och att du är helt nöjd.</p>
+        </div>
+
+      </div>
+
+      <div class="process-cta reveal">
+        <p>Redo att starta ditt projekt?</p>
+        <a href="#kontakt" class="btn btn-primary cta-pulse">Begär kostnadsfri offert</a>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ===== PROJEKT ===== -->
   <section id="projekt">
     <div class="container">
@@ -1452,41 +1543,6 @@
           <p class="quote">"Snabb respons, tydlig offert och ett härligt gäng som gjorde om vårt badrum på utsatt tid. Toppenresultat!"</p>
           <div class="testimonial-author"><strong>Johan Ekström</strong><span>Stockholm</span></div>
         </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== FÖLJ OSS ===== -->
-  <section id="folj-oss">
-    <div class="container">
-      <div class="folj-inner reveal">
-        <span class="eyebrow">Håll kontakten</span>
-        <h2>Följ oss</h2>
-        <p>Följ Johamar AB på sociala medier och ta del av våra senaste projekt, renoveringar, målningar, altaner, trädäck och byggarbeten i Stockholm med omnejd.</p>
-      </div>
-      <div class="folj-cards">
-
-        <a href="https://www.facebook.com/profile.php?id=100091965529718" target="_blank" rel="noopener" class="folj-card folj-card--fb reveal" aria-label="Besök Johamar AB på Facebook">
-          <div class="folj-icon"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></div>
-          <h3>Facebook</h3>
-          <p>Projekt, nyheter och uppdateringar direkt i ditt flöde.</p>
-          <span class="folj-handle">Johamar AB</span>
-        </a>
-
-        <a href="https://www.instagram.com/johamarbygg" target="_blank" rel="noopener" class="folj-card folj-card--ig reveal" aria-label="Följ Johamar AB på Instagram">
-          <div class="folj-icon"><i class="fa-brands fa-instagram" aria-hidden="true"></i></div>
-          <h3>Instagram</h3>
-          <p>Bilder och inspiration från pågående och avslutade projekt.</p>
-          <span class="folj-handle">@johamarbygg</span>
-        </a>
-
-        <a href="https://wa.me/46723213232" target="_blank" rel="noopener" class="folj-card folj-card--wa reveal" aria-label="Kontakta Johamar AB via WhatsApp">
-          <div class="folj-icon"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></div>
-          <h3>WhatsApp</h3>
-          <p>Skriv direkt till oss för snabb kontakt och kostnadsfri offert.</p>
-          <span class="folj-handle">0723 21 32 32</span>
-        </a>
-
       </div>
     </div>
   </section>
