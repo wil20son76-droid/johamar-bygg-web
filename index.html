@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Johamar AB – Bygg & Renovering i Stockholm</title>
 
+<!-- Favicons -->
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<meta name="theme-color" content="#0F0F0F">
+
 <!-- Primary Meta -->
 <meta name="description" content="Johamar AB – Professionella bygg- och renoveringstjänster i Stockholm. Målning, köksrenovering, golvläggning, altaner, taktvätt och mycket mer. Ring oss idag!">
 <meta name="keywords" content="byggföretag Stockholm, renovering Kungsängen, målare Stockholm, köksrenovering, golvläggning, altaner, taktvätt, Johamar AB">
@@ -65,6 +74,8 @@
     --color-off-white: #F5F0EB;
     --color-muted: #7A7E85;
     --color-surface: #141820;
+    --color-navy: #0F2A4A;
+    --color-navy-light: #1D4470;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -164,18 +175,11 @@
   .nav-logo {
     display: flex;
     align-items: center;
-    gap: 12px;
   }
   .nav-logo img {
-    height: 44px;
+    height: 46px;
     width: auto;
-    border-radius: 6px;
-  }
-  .nav-logo span {
-    font-family: 'Sora', sans-serif;
-    font-weight: 800;
-    font-size: 1.15rem;
-    letter-spacing: 0.02em;
+    display: block;
   }
   .nav-links {
     display: flex;
@@ -205,21 +209,23 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    padding: 14px 30px;
+    padding: 15px 32px;
     border-radius: 6px;
     font-weight: 500;
     font-size: 0.95rem;
+    letter-spacing: 0.015em;
     transition: all 0.3s ease;
     white-space: nowrap;
   }
   .btn-primary {
-    background: var(--color-accent);
+    background: linear-gradient(135deg, var(--color-accent-light), var(--color-accent));
     color: var(--color-off-white);
+    box-shadow: 0 6px 20px rgba(200, 82, 10, 0.28);
   }
   .btn-primary:hover {
-    background: var(--color-accent-light);
+    background: linear-gradient(135deg, var(--color-accent-light), var(--color-accent-light));
     transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(200, 82, 10, 0.4);
+    box-shadow: 0 14px 36px rgba(200, 82, 10, 0.45);
   }
   .btn-outline {
     background: transparent;
@@ -229,6 +235,7 @@
   .btn-outline:hover {
     border-color: var(--color-off-white);
     background: rgba(245, 240, 235, 0.08);
+    transform: translateY(-2px);
   }
   .nav-links .btn { padding: 11px 24px; font-size: 0.9rem; }
 
@@ -268,7 +275,8 @@
     inset: -10% -10% -10% -10%;
     background-image:
       repeating-linear-gradient(135deg, rgba(200, 82, 10, 0.07) 0px, rgba(200, 82, 10, 0.07) 2px, transparent 2px, transparent 40px),
-      radial-gradient(circle at 75% 30%, rgba(200, 82, 10, 0.18), transparent 55%),
+      radial-gradient(circle at 78% 28%, rgba(200, 82, 10, 0.20), transparent 52%),
+      radial-gradient(circle at 16% 82%, rgba(29, 68, 112, 0.30), transparent 50%),
       linear-gradient(180deg, #0F0F0F 0%, #1A1E24 100%);
     z-index: 0;
     will-change: transform;
@@ -281,6 +289,15 @@
   .hero-content h1 {
     font-size: clamp(2.4rem, 7vw, 4.6rem);
     margin-bottom: 24px;
+  }
+  .hero-logo {
+    height: clamp(34px, 5vw, 52px);
+    width: auto;
+    margin-bottom: 28px;
+    opacity: 0;
+    transform: translateY(24px);
+    animation: word-in 0.8s ease forwards 0.1s;
+    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.35));
   }
   .hero-content h1 .word {
     display: inline-block;
@@ -368,7 +385,9 @@
 
   /* ===== STATS ===== */
   #stats {
-    background: var(--color-steel);
+    background:
+      linear-gradient(120deg, rgba(29,68,112,0.16), transparent 60%),
+      var(--color-steel);
     padding: 64px 0;
     border-top: 1px solid rgba(245,240,235,0.06);
     border-bottom: 1px solid rgba(245,240,235,0.06);
@@ -379,10 +398,16 @@
     gap: 32px;
     text-align: center;
   }
+  .stats-grid > div {
+    padding: 0 12px;
+    border-left: 2px solid rgba(200, 82, 10, 0.35);
+  }
+  .stats-grid > div:first-child { border-left: none; }
   .stat-num {
     font-family: 'Sora', sans-serif;
     font-weight: 800;
     font-size: clamp(2.2rem, 5vw, 3.2rem);
+    letter-spacing: -0.02em;
     color: var(--color-accent);
   }
   .stat-label {
@@ -410,7 +435,7 @@
     background: #fff;
     border: 1px solid rgba(15,15,15,0.08);
     border-radius: 12px;
-    padding: 36px 30px;
+    padding: 36px 28px;
     transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
   }
   .service-card:hover {
@@ -418,14 +443,29 @@
     box-shadow: 0 20px 50px rgba(15,15,15,0.12);
     border-color: var(--color-accent);
   }
+  .service-card .icon-chip {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    background: linear-gradient(150deg, rgba(200,82,10,0.12), rgba(15,42,74,0.10));
+    transition: background 0.35s ease, transform 0.35s ease;
+  }
+  .service-card:hover .icon-chip {
+    transform: scale(1.08) rotate(-4deg);
+    background: linear-gradient(150deg, rgba(200,82,10,0.2), rgba(15,42,74,0.16));
+  }
   .service-card i {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     color: var(--color-accent);
-    margin-bottom: 18px;
   }
   .service-card h3 {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     margin-bottom: 8px;
+    letter-spacing: -0.01em;
   }
   .service-card p {
     color: var(--color-muted);
@@ -486,10 +526,19 @@
     justify-content: center;
     overflow: hidden;
   }
+  .about-visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 45%, rgba(200,82,10,0.16), transparent 60%);
+  }
   .about-visual img {
-    width: 64%;
-    opacity: 0.95;
-    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
+    position: relative;
+    z-index: 1;
+    width: 72%;
+    height: auto;
+    opacity: 0.96;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.55));
   }
 
   /* ===== PROJECTS ===== */
@@ -559,7 +608,9 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 20% 30%, rgba(200,82,10,0.08), transparent 50%);
+    background:
+      radial-gradient(circle at 20% 30%, rgba(200,82,10,0.08), transparent 50%),
+      radial-gradient(circle at 85% 75%, rgba(29,68,112,0.18), transparent 55%);
     pointer-events: none;
   }
   .testimonials-track {
@@ -576,10 +627,15 @@
   .testimonial-card {
     scroll-snap-align: start;
     flex: 0 0 min(380px, 85vw);
-    background: var(--color-surface);
+    background: linear-gradient(160deg, var(--color-surface), var(--color-navy) 220%);
     border: 1px solid rgba(245,240,235,0.08);
     border-radius: 14px;
     padding: 32px;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+  }
+  .testimonial-card:hover {
+    border-color: rgba(200,82,10,0.35);
+    transform: translateY(-4px);
   }
   .stars { color: var(--color-accent); margin-bottom: 16px; letter-spacing: 3px; }
   .testimonial-card p.quote {
@@ -708,9 +764,11 @@
 
   /* ===== FOOTER ===== */
   footer {
-    background: var(--color-steel);
+    background:
+      radial-gradient(circle at 12% 0%, rgba(29,68,112,0.22), transparent 45%),
+      var(--color-steel);
     padding: 80px 0 0;
-    border-top: 1px solid rgba(245,240,235,0.06);
+    border-top: 2px solid var(--color-accent);
   }
   .footer-grid {
     display: grid;
@@ -724,8 +782,7 @@
     gap: 12px;
     margin-bottom: 16px;
   }
-  .footer-brand img { height: 42px; border-radius: 6px; }
-  .footer-brand span { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.1rem; }
+  .footer-brand img { height: 38px; width: auto; }
   .footer-tagline { color: var(--color-muted); font-size: 0.92rem; margin-bottom: 20px; max-width: 280px; }
   .footer-social { display: flex; gap: 12px; }
   .footer-social a {
@@ -794,7 +851,8 @@
     }
     .nav-links.open { right: 0; }
     .hamburger { display: flex; }
-    .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 36px; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 36px 0; }
+    .stats-grid > div { border-left: none; padding: 0; }
     .services-grid { grid-template-columns: 1fr; }
     .projects-grid { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr; }
@@ -808,9 +866,8 @@
 <!-- ===== NAV ===== -->
 <nav id="navbar">
   <div class="container nav-inner">
-    <a href="#hero" class="nav-logo">
-      <img src="logo.png" alt="Johamar AB logotyp" loading="lazy">
-      <span>Johamar AB</span>
+    <a href="#hero" class="nav-logo" aria-label="Johamar AB – till startsidan">
+      <img src="logo.png" alt="Johamar AB – Bygg & Renovering" width="2000" height="803">
     </a>
     <div class="nav-links" id="navLinks">
       <a href="#hero">Hem</a>
@@ -832,6 +889,7 @@
   <section id="hero">
     <div class="hero-bg" id="heroBg"></div>
     <div class="container hero-content">
+      <img class="hero-logo" src="logo-light.png" alt="Johamar AB – Bygg & Renovering" width="2000" height="803">
       <h1 id="heroHeadline" aria-label="Vi bygger drömmar — du lever dem">
         <span class="word">Vi</span>
         <span class="word">bygger</span>
@@ -895,42 +953,42 @@
       </div>
       <div class="services-grid">
         <article class="service-card reveal">
-          <i class="fa-solid fa-paint-roller" aria-hidden="true"></i>
+          <div class="icon-chip"><i class="fa-solid fa-paint-roller" aria-hidden="true"></i></div>
           <h3>Målning inomhus & utomhus</h3>
           <p>Professionell målning som ger ytor nytt liv, inom- och utomhus.</p>
         </article>
         <article class="service-card reveal">
-          <i class="fa-solid fa-tree" aria-hidden="true"></i>
+          <div class="icon-chip"><i class="fa-solid fa-tree" aria-hidden="true"></i></div>
           <h3>Altaner & Trädäck</h3>
           <p>Skräddarsydda uteplatser och trädäck byggda för att hålla länge.</p>
         </article>
         <article class="service-card reveal">
-          <i class="fa-solid fa-kitchen-set" aria-hidden="true"></i>
+          <div class="icon-chip"><i class="fa-solid fa-kitchen-set" aria-hidden="true"></i></div>
           <h3>Köksrenovering</h3>
           <p>Helrenoveringar av kök – från planering till färdigt resultat.</p>
         </article>
         <article class="service-card reveal">
-          <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+          <div class="icon-chip"><i class="fa-solid fa-layer-group" aria-hidden="true"></i></div>
           <h3>Golvläggning</h3>
           <p>Läggning av alla typer av golv med precision och kvalitet.</p>
         </article>
         <article class="service-card reveal">
-          <i class="fa-solid fa-house-flood-water" aria-hidden="true"></i>
+          <div class="icon-chip"><i class="fa-solid fa-house-flood-water" aria-hidden="true"></i></div>
           <h3>Taktvätt</h3>
           <p>Skonsam och effektiv rengöring som förlänger takets livslängd.</p>
         </article>
         <article class="service-card reveal">
-          <i class="fa-solid fa-trowel-bricks" aria-hidden="true"></i>
+          <div class="icon-chip"><i class="fa-solid fa-trowel-bricks" aria-hidden="true"></i></div>
           <h3>Fasadrenovering</h3>
           <p>Vi ger fasader nytt liv och skyddar fastigheten mot väder och vind.</p>
         </article>
         <article class="service-card reveal">
-          <i class="fa-solid fa-bath" aria-hidden="true"></i>
+          <div class="icon-chip"><i class="fa-solid fa-bath" aria-hidden="true"></i></div>
           <h3>Badrumsrenovering</h3>
           <p>Funktionella och stilrena badrum med fackmässigt utförande.</p>
         </article>
         <article class="service-card reveal">
-          <i class="fa-solid fa-ellipsis" aria-hidden="true"></i>
+          <div class="icon-chip"><i class="fa-solid fa-ellipsis" aria-hidden="true"></i></div>
           <h3>Och mycket mer</h3>
           <p>Hör av dig så berättar vi hur vi kan hjälpa till med ditt nästa projekt.</p>
         </article>
@@ -959,7 +1017,7 @@
         </ul>
       </div>
       <div class="reveal about-visual">
-        <img src="logo.png" alt="Johamar AB logotyp" loading="lazy">
+        <img src="logo-light.png" alt="Johamar AB – Bygg & Renovering" width="2000" height="803" loading="lazy">
       </div>
     </div>
   </section>
@@ -1131,8 +1189,7 @@
     <div class="footer-grid">
       <div>
         <div class="footer-brand">
-          <img src="logo.png" alt="Johamar AB logotyp" loading="lazy">
-          <span>Johamar AB</span>
+          <img src="logo-light.png" alt="Johamar AB – Bygg & Renovering" width="2000" height="803" loading="lazy">
         </div>
         <p class="footer-tagline">Bygg- och renoveringstjänster med kvalitet och engagemang i Stockholm och omnejd.</p>
         <div class="footer-social">
