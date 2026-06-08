@@ -562,6 +562,101 @@
     height: auto;
   }
 
+  /* ===== VARFÖR VÄLJA ===== */
+  #varfor {
+    background: var(--color-surface);
+    padding: 120px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  #varfor::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 0% 50%, rgba(200,82,10,0.07), transparent 55%),
+      radial-gradient(ellipse at 100% 50%, rgba(15,42,74,0.12), transparent 55%);
+    pointer-events: none;
+  }
+  #varfor .section-head {
+    margin-bottom: 64px;
+  }
+  .varfor-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 64px;
+  }
+  .varfor-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    padding: 36px 30px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+    cursor: default;
+  }
+  .varfor-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light));
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+  .varfor-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+    border-color: rgba(200,82,10,0.25);
+    background: rgba(255,255,255,0.05);
+  }
+  .varfor-card:hover::before {
+    opacity: 1;
+  }
+  .varfor-icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    background: linear-gradient(150deg, rgba(200,82,10,0.18), rgba(15,42,74,0.14));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 22px;
+    transition: transform 0.35s ease, background 0.35s ease;
+  }
+  .varfor-card:hover .varfor-icon {
+    transform: scale(1.08) rotate(-4deg);
+    background: linear-gradient(150deg, rgba(200,82,10,0.28), rgba(15,42,74,0.22));
+  }
+  .varfor-icon i {
+    font-size: 1.4rem;
+    color: var(--color-accent);
+  }
+  .varfor-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--color-off-white);
+    letter-spacing: -0.01em;
+  }
+  .varfor-card p {
+    font-size: 0.93rem;
+    color: var(--color-muted);
+    line-height: 1.65;
+  }
+  .varfor-cta {
+    text-align: center;
+  }
+  @media (max-width: 1024px) {
+    .varfor-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .varfor-grid { grid-template-columns: 1fr; gap: 18px; }
+    .varfor-card { padding: 28px 22px; }
+  }
+
   /* ===== PROJECTS ===== */
   #projekt {
     background: var(--color-steel);
@@ -1076,11 +1171,65 @@
     </div>
   </section>
 
+  <!-- ===== VARFÖR VÄLJA ===== -->
+  <section id="varfor">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Vår styrka</span>
+          <h2>Varför välja Johamar AB?</h2>
+        </div>
+      </div>
+      <div class="varfor-grid">
+
+        <div class="varfor-card reveal">
+          <div class="varfor-icon"><i class="fa-solid fa-medal" aria-hidden="true"></i></div>
+          <h3>Kvalitet i varje detalj</h3>
+          <p>Vi kompromissar aldrig med materialkvalitet eller utförande. Varje projekt slutförs med samma höga standard — oavsett uppdragets storlek.</p>
+        </div>
+
+        <div class="varfor-card reveal">
+          <div class="varfor-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
+          <h3>Trygg process från start till mål</h3>
+          <p>Tydliga avtal, realistiska tidsplaner och löpande uppdateringar ger dig full kontroll. Du ska aldrig behöva undra vad som händer härnäst.</p>
+        </div>
+
+        <div class="varfor-card reveal">
+          <div class="varfor-icon"><i class="fa-solid fa-hard-hat" aria-hidden="true"></i></div>
+          <h3>Bred erfarenhet inom bygg &amp; renovering</h3>
+          <p>Sedan 2012 har vi genomfört hundratals projekt i Stockholmsregionen — från mindre renoveringar till större ombyggnationer. Erfarenheten syns i resultatet.</p>
+        </div>
+
+        <div class="varfor-card reveal">
+          <div class="varfor-icon"><i class="fa-solid fa-comments" aria-hidden="true"></i></div>
+          <h3>Personlig service och tydlig kommunikation</h3>
+          <p>Du har alltid direktkontakt med ansvarig hantverkare. Vi lyssnar, förklarar och håller dig informerad — utan onödig byråkrati.</p>
+        </div>
+
+        <div class="varfor-card reveal">
+          <div class="varfor-icon"><i class="fa-solid fa-sliders" aria-hidden="true"></i></div>
+          <h3>Lösningar anpassade efter dig</h3>
+          <p>Varje kunds behov är unikt. Vi tar fram skräddarsydda lösningar som passar din budget, dina önskemål och din fastighets förutsättningar.</p>
+        </div>
+
+        <div class="varfor-card reveal">
+          <div class="varfor-icon"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></div>
+          <h3>Lokal närvaro i Stockholm med omnejd</h3>
+          <p>Med bas i Kungsängen känner vi väl till regionens förutsättningar, lokala regelverk och leverantörsnätverk — vilket ger dig ett smidigare och mer kostnadseffektivt projekt.</p>
+        </div>
+
+      </div>
+      <div class="varfor-cta reveal">
+        <a href="#kontakt" class="btn btn-primary cta-pulse">Kontakta oss för en kostnadsfri offert</a>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== PROJEKT ===== -->
   <section id="projekt">
     <div class="container">
       <div class="section-head reveal">
-        <span class="section-number">02</span>
+        <span class="section-number">03</span>
         <div>
           <span class="eyebrow">Vårt arbete</span>
           <h2>Senaste Projekt</h2>
@@ -1122,7 +1271,7 @@
   <section id="omdomen">
     <div class="container">
       <div class="section-head reveal">
-        <span class="section-number">03</span>
+        <span class="section-number">04</span>
         <div>
           <span class="eyebrow">Vad kunderna säger</span>
           <h2>Omdömen</h2>
@@ -1157,7 +1306,7 @@
   <section id="kontakt">
     <div class="container">
       <div class="section-head reveal">
-        <span class="section-number">04</span>
+        <span class="section-number">05</span>
         <div>
           <span class="eyebrow">Hör av dig</span>
           <h2>Begär din offert idag</h2>
