@@ -715,11 +715,14 @@
     border-radius: 12px;
     overflow: hidden;
     cursor: pointer;
+    background: #141820;
   }
+  /* Gradient fallback shown when image is absent */
   .project-card .pc-bg {
     position: absolute;
     inset: 0;
     transition: transform 0.6s ease;
+    z-index: 1;
   }
   .project-card:nth-child(1) .pc-bg { background: repeating-linear-gradient(120deg, #2a2f38 0 16px, #1A1E24 16px 32px); }
   .project-card:nth-child(2) .pc-bg { background: repeating-linear-gradient(60deg, #3a2417 0 16px, #1A1E24 16px 32px); }
@@ -727,33 +730,262 @@
   .project-card:nth-child(4) .pc-bg { background: repeating-linear-gradient(30deg, #233038 0 16px, #1A1E24 16px 32px); }
   .project-card:nth-child(5) .pc-bg { background: repeating-linear-gradient(105deg, #34281b 0 16px, #1A1E24 16px 32px); }
   .project-card:nth-child(6) .pc-bg { background: repeating-linear-gradient(75deg, #28323a 0 16px, #1A1E24 16px 32px); }
-  .project-card:hover .pc-bg { transform: scale(1.08); }
-  .pc-overlay {
+  .project-card:hover .pc-bg { transform: scale(1.06); }
+  /* Real photo — sits above fallback gradient */
+  .pc-img {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(15,15,15,0.92), rgba(15,15,15,0.1) 60%);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 24px;
-    opacity: 0;
-    transform: translateY(12px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+    z-index: 2;
   }
-  .project-card:hover .pc-overlay { opacity: 1; transform: translateY(0); }
-  .pc-overlay span {
+  .project-card:hover .pc-img { transform: scale(1.06); }
+  /* Bottom-gradient info bar — always visible */
+  .pc-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.5) 60%, transparent 100%);
+    padding: 40px 20px 18px;
+    z-index: 3;
+    transition: padding 0.3s ease;
+  }
+  .project-card:hover .pc-info { padding-bottom: 22px; }
+  .pc-category {
+    display: block;
     color: var(--color-accent);
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     margin-bottom: 4px;
+    font-weight: 500;
   }
-  .pc-overlay h3 {
-    font-size: 1.2rem;
+  .pc-info h3 {
+    font-size: 1.05rem;
+    color: var(--color-off-white);
+    margin-bottom: 2px;
   }
+  .pc-location {
+    font-size: 0.78rem;
+    color: rgba(245,240,235,0.55);
+  }
+  /* Zoom/expand icon on hover */
+  .pc-zoom {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(15,15,15,0.6);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 0.95rem;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 4;
+  }
+  .project-card:hover .pc-zoom { opacity: 1; transform: scale(1); }
   .projects-cta {
     text-align: center;
     margin-top: 56px;
+  }
+
+  /* ===== PROJECT LIGHTBOX ===== */
+  .proj-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .proj-lightbox.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .plb-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(5,5,5,0.92);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+  }
+  .plb-box {
+    position: relative;
+    z-index: 1;
+    background: var(--color-surface);
+    border: 1px solid rgba(245,240,235,0.1);
+    border-radius: 16px;
+    overflow: hidden;
+    max-width: 900px;
+    width: 100%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.7);
+    transform: scale(0.96) translateY(12px);
+    transition: transform 0.3s ease;
+  }
+  .proj-lightbox.open .plb-box {
+    transform: scale(1) translateY(0);
+  }
+  .plb-img-wrap {
+    position: relative;
+    background: #0a0a0a;
+    flex-shrink: 0;
+  }
+  .plb-img-wrap img {
+    width: 100%;
+    max-height: 420px;
+    object-fit: cover;
+    display: block;
+  }
+  /* Before / After toggle */
+  .plb-ba-btns {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    background: rgba(10,10,10,0.75);
+    border-radius: 24px;
+    padding: 5px 8px;
+  }
+  .plb-ba-btn {
+    background: transparent;
+    border: 1px solid rgba(245,240,235,0.25);
+    color: rgba(245,240,235,0.7);
+    border-radius: 18px;
+    padding: 5px 14px;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    font-family: inherit;
+  }
+  .plb-ba-btn.active {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #fff;
+  }
+  /* Fallback shown when no real image */
+  .plb-img-placeholder {
+    width: 100%;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: rgba(245,240,235,0.35);
+  }
+  .plb-img-placeholder i { font-size: 3rem; color: var(--color-accent); opacity: 0.4; }
+  .plb-img-placeholder span { font-size: 0.85rem; }
+  /* Info panel */
+  .plb-info {
+    padding: 24px 28px 28px;
+    overflow-y: auto;
+    flex: 1;
+  }
+  .plb-category {
+    display: inline-block;
+    color: var(--color-accent);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .plb-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--color-off-white);
+    margin-bottom: 4px;
+  }
+  .plb-location {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .plb-desc {
+    font-size: 0.95rem;
+    color: rgba(245,240,235,0.72);
+    line-height: 1.7;
+  }
+  /* Nav arrows */
+  .plb-prev, .plb-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(245,240,235,0.1);
+    border: 1px solid rgba(245,240,235,0.15);
+    color: var(--color-off-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+    transition: background 0.2s;
+    font-size: 1rem;
+  }
+  .plb-prev { left: -56px; }
+  .plb-next { right: -56px; }
+  .plb-prev:hover, .plb-next:hover { background: rgba(245,240,235,0.2); }
+  .plb-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(10,10,10,0.7);
+    border: 1px solid rgba(245,240,235,0.15);
+    color: var(--color-off-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 5;
+    font-size: 1rem;
+    transition: background 0.2s;
+  }
+  .plb-close:hover { background: rgba(200,82,10,0.7); }
+  .plb-counter {
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
+    font-size: 0.75rem;
+    color: rgba(245,240,235,0.5);
+    background: rgba(10,10,10,0.6);
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+  @media (max-width: 768px) {
+    .plb-prev { left: 8px; top: auto; bottom: -52px; transform: none; }
+    .plb-next { right: 8px; top: auto; bottom: -52px; transform: none; }
+    .plb-img-wrap img { max-height: 260px; }
+    .plb-info { padding: 18px 20px 24px; }
+    .plb-title { font-size: 1.1rem; }
   }
 
   /* ===== TESTIMONIALS ===== */
@@ -1658,31 +1890,126 @@
           <h2>Senaste Projekt</h2>
         </div>
       </div>
+      <!--
+        ╔══════════════════════════════════════════════════════════════╗
+        ║  CÓMO AGREGAR UN NUEVO PROYECTO — see README.md for details  ║
+        ║                                                              ║
+        ║  1. Copia uno de los bloques <article> de abajo.            ║
+        ║  2. Cambia src="images/projects/ARCHIVO.jpg" por tu foto.   ║
+        ║  3. Actualiza: data-category, data-title, data-location,    ║
+        ║     data-desc y el atributo alt de la imagen.               ║
+        ║  4. Opcional: añade data-before y data-after para           ║
+        ║     vista "Antes / Después" en el lightbox.                 ║
+        ║  5. Para ocultar el proyecto, añade: hidden                 ║
+        ╚══════════════════════════════════════════════════════════════╝
+      -->
       <div class="projects-grid">
-        <article class="project-card reveal">
+
+        <!-- PROYECTO 1 — Köksrenovering, Kungsängen -->
+        <article class="project-card reveal"
+          data-category="Köksrenovering"
+          data-title="Köksrenovering i Villa"
+          data-location="Kungsängen, Upplands-Bro"
+          data-desc="Komplett köksrenovering med nya skåp, bänkskivor i kvartskomposit, ny belysning och kakelläggning. Projektet utfördes på tre veckor med minimal störning för familjen.">
+          <!-- Replace src with your real photo. Keep the alt text descriptive for SEO. -->
+          <img class="pc-img" loading="lazy" width="800" height="600"
+            src="images/projects/koksrenovering-kungsangen-1.jpg"
+            alt="Köksrenovering i villa i Kungsängen – nytt kök med moderna skåp och kvartskomposit – Johamar AB"
+            onerror="this.style.display='none'">
           <div class="pc-bg"></div>
-          <div class="pc-overlay"><span>Köksrenovering</span><h3>Villa, Kungsängen</h3></div>
+          <div class="pc-info">
+            <span class="pc-category">Köksrenovering</span>
+            <h3>Villa, Kungsängen</h3>
+            <span class="pc-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Kungsängen</span>
+          </div>
+          <div class="pc-zoom" aria-hidden="true"><i class="fa-solid fa-expand"></i></div>
         </article>
-        <article class="project-card reveal">
+
+        <!-- PROYECTO 2 — Målning, Stockholm -->
+        <article class="project-card reveal"
+          data-category="Målning utomhus"
+          data-title="Fasadmålning av Villa"
+          data-location="Stockholm"
+          data-desc="Utvändig målning av tvåvåningsvilla. Fasaden skrapades, grundades och målades med silikatfärg som ger lång hållbarhet och ett premium resultat. Klart på fem dagar.">
+          <img class="pc-img" loading="lazy" width="800" height="600"
+            src="images/projects/malning-stockholm-1.jpg"
+            alt="Fasadmålning av villa i Stockholm – utvändig målning med silikatfärg – Johamar AB"
+            onerror="this.style.display='none'">
           <div class="pc-bg"></div>
-          <div class="pc-overlay"><span>Altan & Trädäck</span><h3>Radhus, Bro</h3></div>
+          <div class="pc-info">
+            <span class="pc-category">Målning utomhus</span>
+            <h3>Villa, Stockholm</h3>
+            <span class="pc-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Stockholm</span>
+          </div>
+          <div class="pc-zoom" aria-hidden="true"><i class="fa-solid fa-expand"></i></div>
         </article>
-        <article class="project-card reveal">
+
+        <!-- PROYECTO 3 — Altan, Bro (with before/after example) -->
+        <article class="project-card reveal"
+          data-category="Altan & Trädäck"
+          data-title="Ny Altan med Trädäck"
+          data-location="Bro, Upplands-Bro"
+          data-desc="Nybyggnation av 32 m² altan i tryckimpregnerat trä med inbyggd belysning och räcken i stål. Projektet inkluderade markarbete och dränering."
+          data-before="images/projects/altan-bro-1-before.jpg"
+          data-after="images/projects/altan-bro-1.jpg">
+          <img class="pc-img" loading="lazy" width="800" height="600"
+            src="images/projects/altan-bro-1.jpg"
+            alt="Ny altan och trädäck i Bro, Upplands-Bro – 32 m² med inbyggd belysning – Johamar AB"
+            onerror="this.style.display='none'">
           <div class="pc-bg"></div>
-          <div class="pc-overlay"><span>Fasadrenovering</span><h3>Flerbostadshus, Järfälla</h3></div>
+          <div class="pc-info">
+            <span class="pc-category">Altan & Trädäck</span>
+            <h3>Radhus, Bro</h3>
+            <span class="pc-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Bro</span>
+          </div>
+          <div class="pc-zoom" aria-hidden="true"><i class="fa-solid fa-expand"></i></div>
         </article>
-        <article class="project-card reveal">
+
+        <!-- PROYECTO 4 — Fasadrenovering, Järfälla -->
+        <article class="project-card reveal"
+          data-category="Fasadrenovering"
+          data-title="Fasadrenovering Flerbostadshus"
+          data-location="Järfälla"
+          data-desc="Renovering och ommålning av fasad på ett flerbostadshus med 12 lägenheter. Inkluderade lagning av sprickor, isoleringskontroll och slutmålning i två lager.">
           <div class="pc-bg"></div>
-          <div class="pc-overlay"><span>Badrumsrenovering</span><h3>Lägenhet, Stockholm</h3></div>
+          <div class="pc-info">
+            <span class="pc-category">Fasadrenovering</span>
+            <h3>Flerbostadshus, Järfälla</h3>
+            <span class="pc-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Järfälla</span>
+          </div>
+          <div class="pc-zoom" aria-hidden="true"><i class="fa-solid fa-expand"></i></div>
         </article>
-        <article class="project-card reveal">
+
+        <!-- PROYECTO 5 — Badrumsrenovering, Stockholm -->
+        <article class="project-card reveal"
+          data-category="Badrumsrenovering"
+          data-title="Badrumsrenovering i Lägenhet"
+          data-location="Stockholm"
+          data-desc="Totalrenovering av badrum på 6 m² i bostadsrättslägenhet. Rivning, ny vattenisolering, kakel och klinkers, ny duschkabin och toalettgrupp. Klartid 10 dagar.">
           <div class="pc-bg"></div>
-          <div class="pc-overlay"><span>Målning utomhus</span><h3>Villa, Upplands-Bro</h3></div>
+          <div class="pc-info">
+            <span class="pc-category">Badrumsrenovering</span>
+            <h3>Lägenhet, Stockholm</h3>
+            <span class="pc-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Stockholm</span>
+          </div>
+          <div class="pc-zoom" aria-hidden="true"><i class="fa-solid fa-expand"></i></div>
         </article>
-        <article class="project-card reveal">
+
+        <!-- PROYECTO 6 — Golvläggning, Stockholm -->
+        <article class="project-card reveal"
+          data-category="Golvläggning"
+          data-title="Golvläggning i Kontorslokal"
+          data-location="Stockholm"
+          data-desc="Slipning och lackning av 180 m² ekparkett i kontorslokal i Stockholm. Genomfört på en helg för att minimera störningar i verksamheten.">
           <div class="pc-bg"></div>
-          <div class="pc-overlay"><span>Golvläggning</span><h3>Kontor, Stockholm</h3></div>
+          <div class="pc-info">
+            <span class="pc-category">Golvläggning</span>
+            <h3>Kontor, Stockholm</h3>
+            <span class="pc-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Stockholm</span>
+          </div>
+          <div class="pc-zoom" aria-hidden="true"><i class="fa-solid fa-expand"></i></div>
         </article>
+
       </div>
       <div class="projects-cta reveal">
         <a href="https://www.instagram.com/johamarbygg" target="_blank" rel="noopener" class="btn btn-outline">Se alla projekt <i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
@@ -1885,6 +2212,26 @@
   </div>
 </div>
 
+<!-- ===== PROJECT LIGHTBOX ===== -->
+<div class="proj-lightbox" id="projLightbox" role="dialog" aria-modal="true" aria-label="Projektdetaljer">
+  <div class="plb-backdrop" id="plbBackdrop"></div>
+  <button class="plb-prev" id="plbPrev" aria-label="Föregående projekt"><i class="fa-solid fa-chevron-left"></i></button>
+  <div class="plb-box">
+    <button class="plb-close" id="plbClose" aria-label="Stäng"><i class="fa-solid fa-xmark"></i></button>
+    <div class="plb-img-wrap" id="plbImgWrap">
+      <!-- Image or placeholder injected by JS -->
+    </div>
+    <div class="plb-info">
+      <span class="plb-category" id="plbCategory"></span>
+      <h3 class="plb-title" id="plbTitle"></h3>
+      <p class="plb-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <span id="plbLocation"></span></p>
+      <p class="plb-desc" id="plbDesc"></p>
+    </div>
+    <span class="plb-counter" id="plbCounter"></span>
+  </div>
+  <button class="plb-next" id="plbNext" aria-label="Nästa projekt"><i class="fa-solid fa-chevron-right"></i></button>
+</div>
+
 <script>
   // Sticky nav background on scroll
   const navbar = document.getElementById('navbar');
@@ -2038,7 +2385,119 @@
   });
   document.getElementById('svcModalClose').addEventListener('click', closeModal);
   overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // ─── PROJECT LIGHTBOX ───────────────────────────────────────────────────────
+  // Reads project data from DOM data-* attributes on each .project-card.
+  // To add a new project: add a new <article class="project-card"> in the HTML
+  // with the appropriate data-category, data-title, data-location, data-desc,
+  // and optionally data-before / data-after attributes.
+
+  const projLightbox = document.getElementById('projLightbox');
+  const plbImgWrap   = document.getElementById('plbImgWrap');
+  const plbCategory  = document.getElementById('plbCategory');
+  const plbTitle     = document.getElementById('plbTitle');
+  const plbLocation  = document.getElementById('plbLocation');
+  const plbDesc      = document.getElementById('plbDesc');
+  const plbCounter   = document.getElementById('plbCounter');
+
+  // Build a flat list of all visible project cards with their data
+  function getProjects() {
+    return Array.from(document.querySelectorAll('.project-card:not([hidden])'));
+  }
+
+  let currentProjIdx = 0;
+
+  function buildImgWrap(card) {
+    plbImgWrap.innerHTML = '';
+    const src    = card.querySelector('.pc-img')?.src || '';
+    const alt    = card.querySelector('.pc-img')?.alt || '';
+    const before = card.dataset.before || '';
+    const after  = card.dataset.after  || src;
+
+    // Render image (or placeholder if no src)
+    const hasImg = src && !src.endsWith('undefined');
+    if (hasImg) {
+      const img = document.createElement('img');
+      img.src = after || src;
+      img.alt = alt;
+      img.loading = 'eager';
+      plbImgWrap.appendChild(img);
+    } else {
+      const ph = document.createElement('div');
+      ph.className = 'plb-img-placeholder';
+      ph.innerHTML = '<i class="fa-solid fa-image"></i><span>Foto kommer snart — <em>ersätt bildfilen för att visa här</em></span>';
+      plbImgWrap.appendChild(ph);
+    }
+
+    // Before / After toggle — only when both images are provided
+    if (before && after) {
+      const bar = document.createElement('div');
+      bar.className = 'plb-ba-btns';
+      bar.innerHTML = `
+        <button class="plb-ba-btn" data-img="${before}">Före</button>
+        <button class="plb-ba-btn active" data-img="${after}">Efter</button>`;
+      bar.addEventListener('click', e => {
+        const btn = e.target.closest('.plb-ba-btn');
+        if (!btn) return;
+        bar.querySelectorAll('.plb-ba-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const imgEl = plbImgWrap.querySelector('img');
+        if (imgEl) imgEl.src = btn.dataset.img;
+      });
+      plbImgWrap.appendChild(bar);
+    }
+  }
+
+  function openProj(idx) {
+    const projects = getProjects();
+    if (!projects.length) return;
+    currentProjIdx = (idx + projects.length) % projects.length;
+    const card = projects[currentProjIdx];
+
+    buildImgWrap(card);
+    plbCategory.textContent = card.dataset.category || '';
+    plbTitle.textContent    = card.dataset.title    || '';
+    plbLocation.textContent = card.dataset.location || '';
+    plbDesc.textContent     = card.dataset.desc     || '';
+    plbCounter.textContent  = `${currentProjIdx + 1} / ${projects.length}`;
+
+    projLightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeProj() {
+    projLightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Attach click to every project card
+  document.querySelectorAll('.project-card').forEach((card, i) => {
+    card.addEventListener('click', () => openProj(i));
+  });
+
+  document.getElementById('plbClose').addEventListener('click', closeProj);
+  document.getElementById('plbBackdrop').addEventListener('click', closeProj);
+  document.getElementById('plbPrev').addEventListener('click', () => openProj(currentProjIdx - 1));
+  document.getElementById('plbNext').addEventListener('click', () => openProj(currentProjIdx + 1));
+
+  // Keyboard navigation (arrows + Escape)
+  document.addEventListener('keydown', e => {
+    if (!projLightbox.classList.contains('open')) {
+      if (e.key === 'Escape') closeModal();
+      return;
+    }
+    if (e.key === 'Escape')     closeProj();
+    if (e.key === 'ArrowLeft')  openProj(currentProjIdx - 1);
+    if (e.key === 'ArrowRight') openProj(currentProjIdx + 1);
+  });
+
+  // Touch swipe support on mobile
+  let touchStartX = 0;
+  projLightbox.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  projLightbox.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 50) dx < 0 ? openProj(currentProjIdx + 1) : openProj(currentProjIdx - 1);
+  });
 </script>
 
 </body>
