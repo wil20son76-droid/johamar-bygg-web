@@ -443,7 +443,7 @@
 
   .services-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 24px;
   }
   .service-card {
@@ -1183,9 +1183,6 @@
     background: var(--color-accent);
     color: #fff;
   }
-  @media (min-width: 1025px) {
-    .svc-last { grid-column: 2 / span 2; }
-  }
 
   /* ===== SERVICE MODAL ===== */
   .svc-modal-overlay {
@@ -1446,12 +1443,6 @@
           <button class="svc-readmore" data-modal="svc6" aria-haspopup="dialog">Läs mer</button>
         </article>
 
-        <article class="service-card svc-last reveal" data-modal="svc7">
-          <div class="icon-chip"><i class="fa-solid fa-ellipsis" aria-hidden="true"></i></div>
-          <h3>Och mycket mer</h3>
-          <p>Vi erbjuder ett brett utbud av bygg- och renoveringstjänster.</p>
-          <button class="svc-readmore" data-modal="svc7" aria-haspopup="dialog">Läs mer</button>
-        </article>
 
       </div>
       <div class="services-cta reveal">
@@ -1958,11 +1949,6 @@
       icon: 'fa-solid fa-trowel-bricks',
       title: 'Fasadrenovering & Fasadmålning',
       body: 'Vi utför fasadrenovering, reparationer och målning för att ge fastigheten ett nytt liv och ett långvarigt skydd mot väder och vind.'
-    },
-    svc7: {
-      icon: 'fa-solid fa-ellipsis',
-      title: 'Och mycket mer',
-      body: 'Utöver våra huvudsakliga tjänster hjälper vi även till med fastighetsunderhåll, snickeriarbeten, mindre renoveringar och andra byggprojekt. Kontakta oss så hittar vi den bästa lösningen för dig.'
     }
   };
 
