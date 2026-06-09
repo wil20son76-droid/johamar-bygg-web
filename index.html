@@ -84,9 +84,14 @@
     --color-light-gray: #ECE7E0;
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
 
   body {
     font-family: 'DM Sans', sans-serif;
@@ -94,8 +99,12 @@
     color: var(--color-off-white);
     background: var(--color-dark);
     line-height: 1.6;
+    width: 100%;
+    max-width: 100%;
     overflow-x: hidden;
   }
+
+  img, svg, video { max-width: 100%; height: auto; }
 
   h1, h2, h3, h4 {
     font-family: 'Sora', sans-serif;
@@ -235,6 +244,7 @@
     letter-spacing: 0.015em;
     transition: all 0.3s ease;
     white-space: nowrap;
+    max-width: 100%;
   }
   .btn-primary {
     background: linear-gradient(135deg, var(--color-accent-light), var(--color-accent));
@@ -653,6 +663,31 @@
   }
   .varfor-cta {
     text-align: center;
+    margin-top: 56px;
+    padding: 48px 24px;
+    background: linear-gradient(135deg, rgba(200,82,10,0.10) 0%, rgba(200,82,10,0.04) 100%);
+    border: 1px solid rgba(200,82,10,0.18);
+    border-radius: 16px;
+  }
+  .varfor-cta-inner {
+    max-width: 540px;
+    margin: 0 auto;
+  }
+  .varfor-cta-inner p {
+    font-size: 1rem;
+    color: var(--color-off-white);
+    opacity: 0.8;
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+  .varfor-cta .btn {
+    font-size: 0.88rem;
+    padding: 14px 28px;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.4;
+    max-width: 320px;
+    width: 100%;
   }
   @media (max-width: 1024px) {
     .varfor-grid { grid-template-columns: repeat(2, 1fr); }
@@ -660,6 +695,8 @@
   @media (max-width: 600px) {
     .varfor-grid { grid-template-columns: 1fr; gap: 18px; }
     .varfor-card { padding: 28px 22px; }
+    .varfor-cta { padding: 32px 20px; margin-top: 40px; }
+    .varfor-cta .btn { font-size: 0.85rem; padding: 13px 22px; }
   }
 
   /* ===== PROJECTS ===== */
@@ -1310,8 +1347,24 @@
     .services-grid { grid-template-columns: 1fr; }
     .projects-grid { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr; }
-    .hero-badge { right: 20px; bottom: 28px; padding: 12px 18px; }
+    .hero-badge { right: 16px; bottom: 24px; padding: 10px 14px; max-width: calc(100% - 32px); }
+    .hero-badge strong { font-size: 0.85rem; }
+    .hero-badge span { font-size: 0.75rem; }
     .section-head { flex-direction: column; align-items: flex-start; gap: 8px; }
+  }
+
+  @media (max-width: 480px) {
+    .container { padding: 0 16px; }
+    .hero-badge { display: none; }
+    .btn { white-space: normal; text-align: center; line-height: 1.4; }
+    .hero-ctas { flex-direction: column; align-items: flex-start; }
+    .hero-ctas .btn { width: auto; }
+    .process-steps { gap: 24px; }
+    .process-cta { padding: 24px 20px; }
+    footer { padding: 64px 0 40px; }
+    .footer-grid { gap: 40px; }
+    .social-float { right: 12px; bottom: 16px; }
+    .social-float a { width: 44px; height: 44px; font-size: 1.1rem; }
   }
 </style>
 </head>
@@ -1529,7 +1582,10 @@
 
       </div>
       <div class="varfor-cta reveal">
-        <a href="#kontakt" class="btn btn-primary cta-pulse">Kontakta oss för en kostnadsfri offert</a>
+        <div class="varfor-cta-inner">
+          <p>Verksamma sedan 2012 i Stockholm och Kungsängen — vi finns nära dig och levererar alltid med stolthet.</p>
+          <a href="#kontakt" class="btn btn-primary cta-pulse">Kontakta oss för en kostnadsfri offert</a>
+        </div>
       </div>
     </div>
   </section>
