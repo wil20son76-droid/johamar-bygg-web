@@ -507,6 +507,23 @@
     padding: 36px 28px;
     transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
   }
+  /* Imagen superior de tarjeta: margen negativo para romper el padding de la card */
+  .svc-img-wrap {
+    margin: -36px -28px 24px;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: 12px 12px 0 0;
+  }
+  .svc-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+  .service-card:hover .svc-img-wrap img {
+    transform: scale(1.03);
+  }
   .service-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 20px 50px rgba(15,15,15,0.12);
@@ -599,30 +616,17 @@
     position: relative;
     aspect-ratio: 4/5;
     border-radius: 16px;
-    background:
-      repeating-linear-gradient(45deg, rgba(200,82,10,0.12) 0 18px, transparent 18px 36px),
-      linear-gradient(160deg, var(--color-steel), var(--color-surface));
-    border: 1px solid rgba(245,240,235,0.08);
-    box-shadow: 0 30px 70px rgba(15,15,15,0.18);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: var(--color-surface); /* fallback si la imagen no carga */
+    border: 1px solid rgba(237,232,225,0.12);
+    box-shadow: 0 30px 70px rgba(15,15,15,0.28);
     overflow: hidden;
   }
-  .about-visual::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 50% 45%, rgba(200,82,10,0.16), transparent 60%);
-  }
-  .about-logo-plate {
-    position: relative;
-    z-index: 1;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.45);
-  }
-  .about-logo-plate img {
-    width: min(78vw, 280px);
-    height: auto;
+  .about-team-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
   }
 
   /* ===== VARFÖR VÄLJA ===== */
@@ -1947,6 +1951,9 @@
       <div class="services-grid">
 
         <article class="service-card reveal" data-modal="svc1">
+          <div class="svc-img-wrap">
+            <img src="./images/projects/Målning.jpg" alt="Målning och tapetsering – Johamar AB" loading="lazy" width="800" height="500">
+          </div>
           <div class="icon-chip"><i class="fa-solid fa-paint-roller" aria-hidden="true"></i></div>
           <h3>Målning och tapetsering</h3>
           <p>Certifierade målare som utför invändig och utvändig målning samt tapetsering med noggrannhet och hållbara resultat i Stockholm och omnejd.</p>
@@ -1954,6 +1961,9 @@
         </article>
 
         <article class="service-card reveal" data-modal="svc2">
+          <div class="svc-img-wrap">
+            <img src="./images/projects/Kök.jpg" alt="Köksrenovering – Johamar AB" loading="lazy" width="800" height="500">
+          </div>
           <div class="icon-chip"><i class="fa-solid fa-kitchen-set" aria-hidden="true"></i></div>
           <h3>Köksrenovering</h3>
           <p>Helrenovering av kök med fokus på funktion, design och kvalitet – från planering till färdigt drömkök.</p>
@@ -1961,6 +1971,9 @@
         </article>
 
         <article class="service-card reveal" data-modal="svc3">
+          <div class="svc-img-wrap">
+            <img src="./images/projects/Golv.jpg" alt="Golvslipning och golvläggning – Johamar AB" loading="lazy" width="800" height="500">
+          </div>
           <div class="icon-chip"><i class="fa-solid fa-layer-group" aria-hidden="true"></i></div>
           <h3>Golvslipning &amp; Golvläggning</h3>
           <p>Vi slipar, behandlar och lägger golv med precision – och återställer dina parkettgolv till nyskick.</p>
@@ -1968,6 +1981,9 @@
         </article>
 
         <article class="service-card reveal" data-modal="svc4">
+          <div class="svc-img-wrap">
+            <img src="./images/projects/Altan.jpg" alt="Altan och trädäck – Johamar AB" loading="lazy" width="800" height="500">
+          </div>
           <div class="icon-chip"><i class="fa-solid fa-tree" aria-hidden="true"></i></div>
           <h3>Altaner &amp; Terrasser</h3>
           <p>Vi bygger och renoverar altaner och terrasser som håller länge och skapar en trivsam utemiljö.</p>
@@ -1975,6 +1991,9 @@
         </article>
 
         <article class="service-card reveal" data-modal="svc5">
+          <div class="svc-img-wrap">
+            <img src="./images/projects/Tak.png" alt="Takläggning och taktvätt – Johamar AB" loading="lazy" width="800" height="500">
+          </div>
           <div class="icon-chip"><i class="fa-solid fa-house-flood-water" aria-hidden="true"></i></div>
           <h3>Taktvätt</h3>
           <p>Professionell taktvätt som avlägsnar mossa, alger och smuts – och förlänger takets livslängd avsevärt.</p>
@@ -1982,6 +2001,9 @@
         </article>
 
         <article class="service-card reveal" data-modal="svc6">
+          <div class="svc-img-wrap">
+            <img src="./images/projects/Fasad.jpg" alt="Fasadrenovering och fasadmålning – Johamar AB" loading="lazy" width="800" height="500">
+          </div>
           <div class="icon-chip"><i class="fa-solid fa-trowel-bricks" aria-hidden="true"></i></div>
           <h3>Fasadrenovering &amp; Fasadmålning</h3>
           <p>Vi renoverar och målar fasader som skyddar din fastighet mot väder och vind – och ger den ett nytt ansikte.</p>
@@ -2014,7 +2036,10 @@
         </ul>
       </div>
       <div class="reveal about-visual">
-        <span class="logo-plate about-logo-plate"><img src="logo.png" alt="Johamar AB – Byggfirma och renoveringsfirma i Stockholm och Kungsängen" width="2000" height="803" loading="lazy"></span>
+        <img class="about-team-photo"
+             src="./images/projects/Johamar Personal.png"
+             alt="Johamar AB – teamet i Kungsängen och Stockholm"
+             loading="lazy">
       </div>
     </div>
   </section>
@@ -2165,9 +2190,8 @@
           data-title="Köksrenovering i Villa"
           data-location="Kungsängen, Upplands-Bro"
           data-desc="Komplett köksrenovering med nya skåp, bänkskivor i kvartskomposit, ny belysning och kakelläggning. Projektet utfördes på tre veckor med minimal störning för familjen.">
-          <!-- Replace src with your real photo. Keep the alt text descriptive for SEO. -->
           <img class="pc-img" loading="lazy" width="800" height="600"
-            src="images/projects/koksrenovering-kungsangen-1.jpg"
+            src="./images/projects/Kök.jpg"
             alt="Köksrenovering i villa i Kungsängen – nytt kök med moderna skåp och kvartskomposit – Johamar AB"
             onerror="this.style.display='none'">
           <div class="pc-bg"></div>
@@ -2186,7 +2210,7 @@
           data-location="Stockholm"
           data-desc="Utvändig målning av tvåvåningsvilla. Fasaden skrapades, grundades och målades med silikatfärg som ger lång hållbarhet och ett premium resultat. Klart på fem dagar.">
           <img class="pc-img" loading="lazy" width="800" height="600"
-            src="images/projects/malning-stockholm-1.jpg"
+            src="./images/projects/Målning.jpg"
             alt="Fasadmålning av villa i Stockholm – utvändig målning med silikatfärg – Johamar AB"
             onerror="this.style.display='none'">
           <div class="pc-bg"></div>
@@ -2204,10 +2228,8 @@
           data-title="Ny Altan med Trädäck"
           data-location="Bro, Upplands-Bro"
           data-desc="Nybyggnation av 32 m² altan i tryckimpregnerat trä med inbyggd belysning och räcken i stål. Projektet inkluderade markarbete och dränering."
-          data-before="images/projects/altan-bro-1-before.jpg"
-          data-after="images/projects/altan-bro-1.jpg">
           <img class="pc-img" loading="lazy" width="800" height="600"
-            src="images/projects/altan-bro-1.jpg"
+            src="./images/projects/Altan.jpg"
             alt="Ny altan och trädäck i Bro, Upplands-Bro – 32 m² med inbyggd belysning – Johamar AB"
             onerror="this.style.display='none'">
           <div class="pc-bg"></div>
