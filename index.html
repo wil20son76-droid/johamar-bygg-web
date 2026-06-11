@@ -72,13 +72,32 @@
 
 <style>
   :root {
-    --color-dark: #0F0F0F;
-    --color-steel: #1A1E24;
+    /* === STRUCTURAL DARKS (hero, stats, projects, footer) === */
+    --color-dark: #0D1720;           /* deep warm navy-black */
+    --color-steel: #18232F;          /* secondary dark — stats, projects, review CTA */
+
+    /* === MID-TONE DEPTH (om-oss, process) === */
+    --color-slate: #1D2C3E;          /* blue-slate — echoes logo navy */
+
+    /* === LIGHT CONTENT (services, varför, omdömen, contact) === */
+    --color-canvas: #FAFAF8;         /* primary warm white */
+    --color-stone: #F2EFE9;          /* secondary warm stone */
+
+    /* === BRAND === */
     --color-accent: #C8520A;
     --color-accent-light: #E8651A;
+
+    /* === TEXT ON LIGHT SECTIONS === */
+    --color-dark-text: #1A1F2C;      /* headings on light bg */
+    --color-body-text: #3D4350;      /* body on light bg */
+    --color-sub-text: #6B7280;       /* labels/captions on light bg */
+
+    /* === TEXT ON DARK SECTIONS === */
     --color-off-white: #F5F0EB;
-    --color-muted: #7A7E85;
-    --color-surface: #141820;
+    --color-muted: #8A9099;
+
+    /* === SURFACES === */
+    --color-surface: #131C28;        /* card bg in dark sections */
     --color-navy: #0F2A4A;
     --color-navy-light: #1D4470;
     --color-light-gray: #ECE7E0;
@@ -304,9 +323,9 @@
     inset: -10% -10% -10% -10%;
     background-image:
       repeating-linear-gradient(135deg, rgba(200, 82, 10, 0.07) 0px, rgba(200, 82, 10, 0.07) 2px, transparent 2px, transparent 40px),
-      radial-gradient(circle at 78% 28%, rgba(200, 82, 10, 0.20), transparent 52%),
-      radial-gradient(circle at 16% 82%, rgba(29, 68, 112, 0.30), transparent 50%),
-      linear-gradient(180deg, #0F0F0F 0%, #1A1E24 100%);
+      radial-gradient(circle at 78% 28%, rgba(200, 82, 10, 0.22), transparent 52%),
+      radial-gradient(circle at 16% 82%, rgba(15, 42, 74, 0.45), transparent 50%),
+      linear-gradient(180deg, #0D1720 0%, #18232F 100%);
     z-index: 0;
     will-change: transform;
   }
@@ -416,7 +435,7 @@
   /* ===== STATS ===== */
   #stats {
     background:
-      linear-gradient(120deg, rgba(29,68,112,0.16), transparent 60%),
+      linear-gradient(120deg, rgba(15,42,74,0.22), transparent 60%),
       var(--color-steel);
     padding: 64px 0;
     border-top: 1px solid rgba(245,240,235,0.06);
@@ -448,13 +467,13 @@
 
   /* ===== SERVICES ===== */
   #tjanster {
-    background: var(--color-off-white);
-    color: var(--color-dark);
+    background: var(--color-canvas);
+    color: var(--color-dark-text);
     padding: 120px 0;
   }
-  #tjanster .section-head h2,
-  #tjanster .eyebrow { color: var(--color-dark); }
-  #tjanster .section-number { -webkit-text-stroke: 1px var(--color-accent); opacity: 0.25; }
+  #tjanster .section-head h2 { color: var(--color-dark-text); }
+  #tjanster .eyebrow { color: var(--color-accent); }
+  #tjanster .section-number { -webkit-text-stroke: 1px var(--color-accent); opacity: 0.18; }
 
   .services-grid {
     display: grid;
@@ -513,7 +532,7 @@
 
   /* ===== ABOUT ===== */
   #om-oss {
-    background: linear-gradient(135deg, #152035 0%, #1A2540 50%, #1F2D4A 100%);
+    background: linear-gradient(155deg, #18293A 0%, var(--color-slate) 55%, #223348 100%);
     padding: 120px 0;
     overflow: hidden;
     position: relative;
@@ -523,15 +542,13 @@
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse at 80% 15%, rgba(200,82,10,0.10), transparent 52%),
-      radial-gradient(ellipse at 5%  85%, rgba(15,42,74,0.50),   transparent 50%);
+      radial-gradient(ellipse at 82% 18%, rgba(200,82,10,0.11), transparent 50%),
+      radial-gradient(ellipse at 8%  80%, rgba(15,42,74,0.40),   transparent 52%);
     pointer-events: none;
   }
   #om-oss > .container { position: relative; z-index: 1; }
   #om-oss .section-head h2,
-  #om-oss h2 {
-    color: #FFFFFF;
-  }
+  #om-oss h2 { color: var(--color-off-white); }
   .about-grid {
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;
@@ -590,7 +607,7 @@
 
   /* ===== VARFÖR VÄLJA ===== */
   #varfor {
-    background: var(--color-surface);
+    background: linear-gradient(155deg, var(--color-stone) 0%, var(--color-canvas) 50%, var(--color-stone) 100%);
     padding: 120px 0;
     position: relative;
     overflow: hidden;
@@ -600,10 +617,14 @@
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse at 0% 50%, rgba(200,82,10,0.07), transparent 55%),
-      radial-gradient(ellipse at 100% 50%, rgba(15,42,74,0.12), transparent 55%);
+      radial-gradient(ellipse at 0% 50%, rgba(200,82,10,0.05), transparent 55%),
+      radial-gradient(ellipse at 100% 50%, rgba(15,42,74,0.06), transparent 55%);
     pointer-events: none;
   }
+  /* Dark text on light section */
+  #varfor .section-head h2 { color: var(--color-dark-text); }
+  #varfor .eyebrow { color: var(--color-accent); }
+  #varfor .section-number { -webkit-text-stroke: 1px var(--color-accent); opacity: 0.15; color: transparent; }
   #varfor .section-head {
     margin-bottom: 64px;
   }
@@ -614,13 +635,14 @@
     margin-bottom: 64px;
   }
   .varfor-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.07);
+    background: #FFFFFF;
+    border: 1px solid rgba(26,31,44,0.08);
     border-radius: 16px;
     padding: 36px 30px 32px;
     position: relative;
     overflow: hidden;
-    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+    box-shadow: 0 2px 12px rgba(26,31,44,0.06);
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
     cursor: default;
   }
   .varfor-card::before {
@@ -634,9 +656,8 @@
   }
   .varfor-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
-    border-color: rgba(200,82,10,0.25);
-    background: rgba(255,255,255,0.05);
+    box-shadow: 0 20px 48px rgba(26,31,44,0.14);
+    border-color: rgba(200,82,10,0.22);
   }
   .varfor-card:hover::before {
     opacity: 1;
@@ -645,7 +666,7 @@
     width: 54px;
     height: 54px;
     border-radius: 14px;
-    background: linear-gradient(150deg, rgba(200,82,10,0.18), rgba(15,42,74,0.14));
+    background: linear-gradient(150deg, rgba(200,82,10,0.12), rgba(15,42,74,0.08));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -654,7 +675,7 @@
   }
   .varfor-card:hover .varfor-icon {
     transform: scale(1.08) rotate(-4deg);
-    background: linear-gradient(150deg, rgba(200,82,10,0.28), rgba(15,42,74,0.22));
+    background: linear-gradient(150deg, rgba(200,82,10,0.20), rgba(15,42,74,0.14));
   }
   .varfor-icon i {
     font-size: 1.4rem;
@@ -664,20 +685,20 @@
     font-size: 1.1rem;
     font-weight: 700;
     margin-bottom: 12px;
-    color: var(--color-off-white);
+    color: var(--color-dark-text);
     letter-spacing: -0.01em;
   }
   .varfor-card p {
     font-size: 0.93rem;
-    color: var(--color-muted);
+    color: var(--color-body-text);
     line-height: 1.65;
   }
   .varfor-cta {
     text-align: center;
     margin-top: 56px;
     padding: 48px 24px;
-    background: linear-gradient(135deg, rgba(200,82,10,0.10) 0%, rgba(200,82,10,0.04) 100%);
-    border: 1px solid rgba(200,82,10,0.18);
+    background: linear-gradient(135deg, rgba(200,82,10,0.08) 0%, rgba(200,82,10,0.03) 100%);
+    border: 1px solid rgba(200,82,10,0.16);
     border-radius: 16px;
   }
   .varfor-cta-inner {
@@ -686,8 +707,7 @@
   }
   .varfor-cta-inner p {
     font-size: 1rem;
-    color: var(--color-off-white);
-    opacity: 0.8;
+    color: var(--color-body-text);
     margin-bottom: 24px;
     line-height: 1.6;
   }
@@ -1001,7 +1021,7 @@
 
   /* ===== TESTIMONIALS ===== */
   #omdomen {
-    background: linear-gradient(135deg, #152035 0%, #1A2540 50%, #1F2D4A 100%);
+    background: linear-gradient(155deg, #EAE6DF 0%, var(--color-stone) 50%, #E8E3DC 100%);
     padding: 120px 0;
     position: relative;
   }
@@ -1010,10 +1030,14 @@
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(circle at 20% 30%, rgba(200,82,10,0.10), transparent 50%),
-      radial-gradient(circle at 85% 75%, rgba(15,42,74,0.55),  transparent 55%);
+      radial-gradient(circle at 20% 30%, rgba(200,82,10,0.05), transparent 50%),
+      radial-gradient(circle at 85% 75%, rgba(15,42,74,0.04), transparent 55%);
     pointer-events: none;
   }
+  /* Dark text for light omdömen section */
+  #omdomen .section-head h2 { color: var(--color-dark-text); }
+  #omdomen .eyebrow { color: var(--color-accent); }
+  #omdomen .section-number { -webkit-text-stroke: 1px var(--color-accent); opacity: 0.15; color: transparent; }
   .testimonials-track {
     display: flex;
     gap: 24px;
@@ -1028,27 +1052,27 @@
   .testimonial-card {
     scroll-snap-align: start;
     flex: 0 0 min(380px, 85vw);
-    background: linear-gradient(160deg, rgba(255,255,255,0.055) 0%, rgba(255,255,255,0.025) 100%);
-    border: 1px solid rgba(245,240,235,0.13);
+    background: #FFFFFF;
+    border: 1px solid rgba(26,31,44,0.08);
     border-radius: 14px;
     padding: 32px;
-    backdrop-filter: blur(2px);
-    transition: border-color 0.3s ease, transform 0.3s ease, background 0.3s ease;
+    box-shadow: 0 2px 16px rgba(26,31,44,0.07);
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   }
   .testimonial-card:hover {
-    border-color: rgba(200,82,10,0.45);
-    background: linear-gradient(160deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.04) 100%);
+    border-color: rgba(200,82,10,0.28);
+    box-shadow: 0 12px 40px rgba(26,31,44,0.12);
     transform: translateY(-4px);
   }
   .stars { color: var(--color-accent); margin-bottom: 16px; letter-spacing: 3px; }
   .testimonial-card p.quote {
     font-size: 1.02rem;
-    color: rgba(245,240,235,0.92);
+    color: var(--color-body-text);
     margin-bottom: 22px;
     font-style: italic;
   }
-  .testimonial-author strong { display: block; font-family: 'Sora', sans-serif; color: #FFFFFF; }
-  .testimonial-author span { color: rgba(245,240,235,0.60); font-size: 0.85rem; }
+  .testimonial-author strong { display: block; font-family: 'Sora', sans-serif; color: var(--color-dark-text); }
+  .testimonial-author span { color: var(--color-sub-text); font-size: 0.85rem; }
 
   /* ===== REVIEW CTA ===== */
   #review-cta {
@@ -1234,13 +1258,13 @@
 
   /* ===== CONTACT ===== */
   #kontakt {
-    background: var(--color-off-white);
-    color: var(--color-dark);
+    background: var(--color-canvas);
+    color: var(--color-dark-text);
     padding: 120px 0;
   }
-  #kontakt .section-head h2,
-  #kontakt .eyebrow { color: var(--color-dark); }
-  #kontakt .section-number { opacity: 0.25; }
+  #kontakt .section-head h2 { color: var(--color-dark-text); }
+  #kontakt .eyebrow { color: var(--color-accent); }
+  #kontakt .section-number { opacity: 0.18; }
   .contact-grid {
     display: grid;
     grid-template-columns: 0.9fr 1.1fr;
@@ -1374,7 +1398,7 @@
   }
   /* ===== SÅ HÄR ARBETAR VI ===== */
   #process {
-    background: linear-gradient(135deg, #152035 0%, #1A2540 50%, #1F2D4A 100%);
+    background: linear-gradient(155deg, #18293A 0%, var(--color-slate) 55%, #223348 100%);
     padding: 120px 0;
     position: relative;
     overflow: hidden;
@@ -1384,8 +1408,8 @@
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse at 5%  40%, rgba(200,82,10,0.10), transparent 50%),
-      radial-gradient(ellipse at 95% 60%, rgba(15,42,74,0.55),  transparent 55%);
+      radial-gradient(ellipse at 5%  40%, rgba(200,82,10,0.11), transparent 50%),
+      radial-gradient(ellipse at 95% 60%, rgba(15,42,74,0.38),  transparent 55%);
     pointer-events: none;
   }
   .process-header {
@@ -1617,7 +1641,7 @@
 
   /* Separate copyright bar */
   .copyright-bar {
-    background: #080808;
+    background: #070E16;
     border-top: 1px solid rgba(255,255,255,0.06);
     padding: 20px 0;
     text-align: center;
