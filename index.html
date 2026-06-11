@@ -187,20 +187,12 @@
     color: #8B3505;
   }
 
-  /* Reveal animations */
-  @keyframes reveal-fade-up {
-    from { opacity: 0; transform: translateY(40px); }
-    to   { opacity: 1; transform: none; }
-  }
+  /* Reveal animations — opacity-only, no transform → no GPU compositing layer */
   .reveal {
     opacity: 0;
+    transition: opacity 0.9s ease;
   }
   .reveal.is-visible {
-    animation: reveal-fade-up 0.8s ease forwards;
-  }
-  .reveal.is-settled {
-    animation: none;
-    transform: none;
     opacity: 1;
   }
 
@@ -2601,9 +2593,6 @@
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('is-visible');
-        entry.target.addEventListener('animationend', () => {
-          entry.target.classList.add('is-settled');
-        }, { once: true });
         revealObserver.unobserve(entry.target);
       }
     });
