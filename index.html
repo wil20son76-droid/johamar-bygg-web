@@ -166,11 +166,18 @@
   .eyebrow {
     display: inline-block;
     color: var(--color-accent);
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     font-size: 0.85rem;
     margin-bottom: 12px;
+  }
+  /* Darker orange on light backgrounds to meet WCAG AA 4.5:1 (#A34007 = 6.2:1 on #FAFAF8) */
+  #tjanster .eyebrow,
+  #varfor   .eyebrow,
+  #omdomen  .eyebrow,
+  #kontakt  .eyebrow {
+    color: #A34007;
   }
 
   /* Reveal animations */
@@ -1813,7 +1820,22 @@
     .process-steps { gap: 24px; }
     .process-cta { padding: 24px 20px; }
     footer { padding: 44px 0 32px; }
-    .footer-grid { gap: 28px; }
+    /* 2-column footer on small mobile — halves the stacked height */
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 24px 18px;
+      padding-bottom: 28px;
+    }
+    /* Brand spans full width */
+    .footer-grid > div:first-child { grid-column: 1 / -1; }
+    /* Contact info spans full width */
+    .footer-grid > div:last-child  { grid-column: 1 / -1; }
+    .footer-logo-glow img { height: 40px; }
+    .footer-brand  { margin-bottom: 14px; }
+    .footer-tagline { font-size: 0.86rem; margin-bottom: 14px; }
+    .footer-col h4  { font-size: 0.82rem; margin-bottom: 10px; }
+    .footer-col ul  { gap: 9px; }
+    .footer-col a, .footer-col li { font-size: 0.88rem; }
     .social-float { right: 12px; bottom: 16px; }
     .social-float a { width: 44px; height: 44px; font-size: 1.1rem; }
   }
