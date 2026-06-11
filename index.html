@@ -73,34 +73,34 @@
 <style>
   :root {
     /* === STRUCTURAL DARKS (hero, stats, projects, footer) === */
-    --color-dark: #0D1720;           /* deep warm navy-black */
-    --color-steel: #18232F;          /* secondary dark — stats, projects, review CTA */
+    --color-dark: #1A2535;           /* refined dark blue-charcoal */
+    --color-steel: #212E42;          /* secondary dark — stats, projects, review CTA */
 
     /* === MID-TONE DEPTH (om-oss, process) === */
-    --color-slate: #1D2C3E;          /* blue-slate — echoes logo navy */
+    --color-slate: #273448;          /* blue-slate — echoes logo navy */
 
-    /* === LIGHT CONTENT (services, varför, omdömen, contact) === */
-    --color-canvas: #FAFAF8;         /* primary warm white */
-    --color-stone: #F2EFE9;          /* secondary warm stone */
+    /* === GREIGE CONTENT (services, varför, omdömen, contact) === */
+    --color-canvas: #D8D2C8;         /* primary warm greige */
+    --color-stone: #CDCABE;          /* secondary warm greige */
 
     /* === BRAND === */
     --color-accent: #C8520A;
     --color-accent-light: #E8651A;
 
-    /* === TEXT ON LIGHT SECTIONS === */
-    --color-dark-text: #1A1F2C;      /* headings on light bg */
-    --color-body-text: #3D4350;      /* body on light bg */
-    --color-sub-text: #6B7280;       /* labels/captions on light bg */
+    /* === TEXT ON GREIGE SECTIONS === */
+    --color-dark-text: #1F2937;      /* headings on greige bg */
+    --color-body-text: #374151;      /* body on greige bg */
+    --color-sub-text: #4B5563;       /* labels/captions on greige bg — darkened for WCAG AA */
 
     /* === TEXT ON DARK SECTIONS === */
-    --color-off-white: #F5F0EB;
+    --color-off-white: #EDE8E1;      /* warm off-white for dark sections */
     --color-muted: #8A9099;
 
     /* === SURFACES === */
-    --color-surface: #131C28;        /* card bg in dark sections */
+    --color-surface: #18253A;        /* card bg in dark sections */
     --color-navy: #0F2A4A;
     --color-navy-light: #1D4470;
-    --color-light-gray: #ECE7E0;
+    --color-light-gray: #ECE8E1;     /* card bg on greige sections */
   }
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -172,12 +172,19 @@
     font-size: 0.85rem;
     margin-bottom: 12px;
   }
-  /* Darker orange on light backgrounds to meet WCAG AA 4.5:1 (#A34007 = 6.2:1 on #FAFAF8) */
+  /* Lighter orange on dark sections — WCAG AA (#E8651A = 4.6:1 on #1A2535) */
+  #om-oss .eyebrow,
+  #process .eyebrow,
+  #projekt .eyebrow,
+  #review-cta .eyebrow {
+    color: #E8651A;
+  }
+  /* Darker orange on greige sections — WCAG AA (#8B3505 = 4.9:1 on #D8D2C8) */
   #tjanster .eyebrow,
   #varfor   .eyebrow,
   #omdomen  .eyebrow,
   #kontakt  .eyebrow {
-    color: #A34007;
+    color: #8B3505;
   }
 
   /* Reveal animations */
@@ -199,15 +206,15 @@
     right: 0;
     z-index: 1000;
     padding: 16px 0;
-    background: rgba(245, 240, 235, 0.82);
+    background: rgba(210, 204, 194, 0.88);
     backdrop-filter: blur(18px) saturate(140%);
     -webkit-backdrop-filter: blur(18px) saturate(140%);
-    border-bottom: 1px solid rgba(15, 15, 15, 0.06);
-    box-shadow: 0 8px 30px rgba(15, 15, 15, 0.05);
+    border-bottom: 1px solid rgba(15, 15, 15, 0.08);
+    box-shadow: 0 8px 30px rgba(15, 15, 15, 0.06);
     transition: background 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease, border-color 0.4s ease;
   }
   nav.scrolled {
-    background: rgba(245, 240, 235, 0.95);
+    background: rgba(210, 204, 194, 0.97);
     box-shadow: 0 12px 40px rgba(15, 15, 15, 0.1);
     border-bottom-color: rgba(15, 15, 15, 0.09);
     padding: 10px 0;
@@ -332,7 +339,7 @@
       repeating-linear-gradient(135deg, rgba(200, 82, 10, 0.07) 0px, rgba(200, 82, 10, 0.07) 2px, transparent 2px, transparent 40px),
       radial-gradient(circle at 78% 28%, rgba(200, 82, 10, 0.22), transparent 52%),
       radial-gradient(circle at 16% 82%, rgba(15, 42, 74, 0.45), transparent 50%),
-      linear-gradient(180deg, #0D1720 0%, #18232F 100%);
+      linear-gradient(180deg, #1A2535 0%, #212E42 100%);
     z-index: 0;
     will-change: transform;
   }
@@ -488,7 +495,7 @@
     gap: 24px;
   }
   .service-card {
-    background: #fff;
+    background: #ECE8E1;
     border: 1px solid rgba(15,15,15,0.08);
     border-radius: 12px;
     padding: 36px 28px;
@@ -524,7 +531,7 @@
     letter-spacing: -0.01em;
   }
   .service-card p {
-    color: var(--color-muted);
+    color: var(--color-body-text);
     font-size: 0.95rem;
   }
   .services-cta {
@@ -533,13 +540,13 @@
   }
   .services-cta p {
     margin-bottom: 18px;
-    color: var(--color-muted);
+    color: var(--color-body-text);
     font-size: 1.05rem;
   }
 
   /* ===== ABOUT ===== */
   #om-oss {
-    background: linear-gradient(155deg, #18293A 0%, var(--color-slate) 55%, #223348 100%);
+    background: linear-gradient(155deg, #1D2D40 0%, var(--color-slate) 55%, #212E42 100%);
     padding: 120px 0;
     overflow: hidden;
     position: relative;
@@ -642,7 +649,7 @@
     margin-bottom: 64px;
   }
   .varfor-card {
-    background: #FFFFFF;
+    background: #ECE8E1;
     border: 1px solid rgba(26,31,44,0.08);
     border-radius: 16px;
     padding: 36px 30px 32px;
@@ -753,7 +760,7 @@
     border-radius: 12px;
     overflow: hidden;
     cursor: pointer;
-    background: #141820;
+    background: #17202E;
   }
   /* Gradient fallback shown when image is absent */
   .project-card .pc-bg {
@@ -762,12 +769,12 @@
     transition: transform 0.6s ease;
     z-index: 1;
   }
-  .project-card:nth-child(1) .pc-bg { background: repeating-linear-gradient(120deg, #2a2f38 0 16px, #1A1E24 16px 32px); }
-  .project-card:nth-child(2) .pc-bg { background: repeating-linear-gradient(60deg, #3a2417 0 16px, #1A1E24 16px 32px); }
-  .project-card:nth-child(3) .pc-bg { background: repeating-linear-gradient(150deg, #2c2620 0 16px, #1A1E24 16px 32px); }
-  .project-card:nth-child(4) .pc-bg { background: repeating-linear-gradient(30deg, #233038 0 16px, #1A1E24 16px 32px); }
-  .project-card:nth-child(5) .pc-bg { background: repeating-linear-gradient(105deg, #34281b 0 16px, #1A1E24 16px 32px); }
-  .project-card:nth-child(6) .pc-bg { background: repeating-linear-gradient(75deg, #28323a 0 16px, #1A1E24 16px 32px); }
+  .project-card:nth-child(1) .pc-bg { background: repeating-linear-gradient(120deg, #273040 0 16px, #17202E 16px 32px); }
+  .project-card:nth-child(2) .pc-bg { background: repeating-linear-gradient(60deg, #3a2817 0 16px, #17202E 16px 32px); }
+  .project-card:nth-child(3) .pc-bg { background: repeating-linear-gradient(150deg, #2e2924 0 16px, #17202E 16px 32px); }
+  .project-card:nth-child(4) .pc-bg { background: repeating-linear-gradient(30deg, #243340 0 16px, #17202E 16px 32px); }
+  .project-card:nth-child(5) .pc-bg { background: repeating-linear-gradient(105deg, #362b1c 0 16px, #17202E 16px 32px); }
+  .project-card:nth-child(6) .pc-bg { background: repeating-linear-gradient(75deg, #293540 0 16px, #17202E 16px 32px); }
   .project-card:hover .pc-bg { transform: scale(1.06); }
   /* Real photo — sits above fallback gradient */
   .pc-img {
@@ -1028,7 +1035,7 @@
 
   /* ===== TESTIMONIALS ===== */
   #omdomen {
-    background: linear-gradient(155deg, #EAE6DF 0%, var(--color-stone) 50%, #E8E3DC 100%);
+    background: linear-gradient(155deg, #D2CCC2 0%, var(--color-stone) 50%, #CFCABD 100%);
     padding: 120px 0;
     position: relative;
   }
@@ -1059,7 +1066,7 @@
   .testimonial-card {
     scroll-snap-align: start;
     flex: 0 0 min(380px, 85vw);
-    background: #FFFFFF;
+    background: #ECE8E1;
     border: 1px solid rgba(26,31,44,0.08);
     border-radius: 14px;
     padding: 32px;
@@ -1300,10 +1307,10 @@
     font-size: 1.1rem;
   }
   .contact-info-item strong { display: block; font-family: 'Sora', sans-serif; font-size: 1rem; }
-  .contact-info-item span { color: var(--color-muted); font-size: 0.92rem; }
+  .contact-info-item span { color: var(--color-sub-text); font-size: 0.92rem; }
 
   .contact-form {
-    background: #fff;
+    background: #ECE8E1;
     border-radius: 16px;
     padding: 40px;
     border: 1px solid rgba(15,15,15,0.08);
@@ -1325,8 +1332,8 @@
     border: 1.5px solid rgba(15,15,15,0.14);
     font-family: 'DM Sans', sans-serif;
     font-size: 0.95rem;
-    background: var(--color-off-white);
-    color: var(--color-dark);
+    background: #F0EDE8;
+    color: var(--color-dark-text);
     transition: border-color 0.25s ease;
   }
   .form-row input:focus,
@@ -1405,7 +1412,7 @@
   }
   /* ===== SÅ HÄR ARBETAR VI ===== */
   #process {
-    background: linear-gradient(155deg, #18293A 0%, var(--color-slate) 55%, #223348 100%);
+    background: linear-gradient(155deg, #1D2D40 0%, var(--color-slate) 55%, #212E42 100%);
     padding: 120px 0;
     position: relative;
     overflow: hidden;
@@ -1648,7 +1655,7 @@
 
   /* Separate copyright bar */
   .copyright-bar {
-    background: #070E16;
+    background: #0E1926;
     border-top: 1px solid rgba(255,255,255,0.06);
     padding: 20px 0;
     text-align: center;
@@ -1704,7 +1711,7 @@
     pointer-events: all;
   }
   .svc-modal {
-    background: #fff;
+    background: #ECE8E1;
     border-radius: 18px;
     padding: 44px 40px 40px;
     max-width: 520px;
@@ -1787,7 +1794,7 @@
       right: -100%;
       height: 100vh;
       width: min(80vw, 340px);
-      background: rgba(245, 240, 235, 0.98);
+      background: rgba(216, 210, 200, 0.98);
       backdrop-filter: blur(16px);
       box-shadow: -10px 0 50px rgba(15,15,15,0.12);
       flex-direction: column;
